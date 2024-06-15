@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-
     private int currentHealth;
     [SerializeField] private EnemySO enemy;
-
+    private bool isInitialized = false;
 
     private void Start()
     {
@@ -16,17 +15,28 @@ public class EnemyScript : MonoBehaviour
 
     private void InitializeEnemy()
     {
-        // Use data from the ScriptableObject to initialize the enemy
-        currentHealth = enemy.health;
-        // Set up other properties as needed, e.g., speed, damage, etc.
-        // Instantiate the enemy prefab if necessary
-        if (enemy.enemyPrefab != null)
+        if (!isInitialized)
         {
-            Instantiate(enemy.enemyPrefab, transform.position, transform.rotation);
+            currentHealth = enemy.health;
+            // Instantiate the enemy prefab if necessary
+            if (enemy.enemyPrefab != null)
+            {
+                GameObject instantiatedEnemy = Instantiate(enemy.enemyPrefab, transform.position, transform.rotation);
+                // If the prefab has its own EnemyScript, initialize its health as well
+                EnemyScript enemyScript = instantiatedEnemy.GetComponent<EnemyScript>();
+                if (enemyScript != null)
+                {
+                    enemyScript.SetInitialHealth(enemy.health);
+                }
+            }
+            isInitialized = true;
         }
     }
 
-
+    public void SetInitialHealth(int health)
+    {
+        currentHealth = health;
+    }
 
     public void TakeDamage(int damage)
     {
