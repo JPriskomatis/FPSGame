@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -14,12 +13,34 @@ public class Bullet : MonoBehaviour
     public void Fire(float speed, Vector3 direction)
     {
         _rb.velocity = direction * speed;
+        // Start a coroutine to disable the bullet instead of destroying it
+        StartCoroutine(DisableBulletAfterTime(1f));
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyScript>().TakeDamage(5);
+            EnemyScript enemyScript = other.GetComponent<EnemyScript>();
+            if (enemyScript != null)
+            {
+                enemyScript.TakeDamage(5);
+                // Disable the bullet instead of destroying it
+                gameObject.SetActive(false);
+            }
         }
+    }
+
+    private IEnumerator DisableBulletAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        gameObject.SetActive(false);
+    }
+
+    // Method to reset the bullet before reusing it
+    public void ResetBullet()
+    {
+        _rb.velocity = Vector3.zero;
+        gameObject.SetActive(true);
     }
 }

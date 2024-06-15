@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c868dac7a2f5a44a7a24cddcd4c267, type: 3}
   m_Name: ScriptableObjects
   m_EditorClassIdentifier: 
-  health: 
+  health: 25
+  enemyPrefab: {fileID: 793744884894452834, guid: c3e9718e995667645b7c257b9434e457, type: 3}

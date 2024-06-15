@@ -18,11 +18,10 @@ public class EnemyScript : MonoBehaviour
         if (!isInitialized)
         {
             currentHealth = enemy.health;
-            // Instantiate the enemy prefab if necessary
-            if (enemy.enemyPrefab != null)
+            // Only instantiate if this is the original enemy, not an instantiated one
+            if (enemy.enemyPrefab != null && transform.childCount == 0 && !IsInstantiatedEnemy())
             {
                 GameObject instantiatedEnemy = Instantiate(enemy.enemyPrefab, transform.position, transform.rotation);
-                // If the prefab has its own EnemyScript, initialize its health as well
                 EnemyScript enemyScript = instantiatedEnemy.GetComponent<EnemyScript>();
                 if (enemyScript != null)
                 {
@@ -33,6 +32,12 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    private bool IsInstantiatedEnemy()
+    {
+        // Check if this enemy is an instantiated enemy prefab
+        return transform.parent != null && transform.parent.GetComponent<EnemyScript>() != null;
+    }
+
     public void SetInitialHealth(int health)
     {
         currentHealth = health;
@@ -41,7 +46,6 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
             Die();
