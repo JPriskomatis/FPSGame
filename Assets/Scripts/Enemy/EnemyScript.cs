@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -32,7 +33,7 @@ public class EnemyScript : MonoBehaviour
         currentHealth -= damage;
 
         if(floatingText)
-            ShowDamage();
+            ShowDamage(damage);
 
         Debug.Log(currentHealth);
         if (currentHealth <= 0)
@@ -56,8 +57,10 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    private void ShowDamage()
+    private void ShowDamage(int damage)
     {
+        floatingText.GetComponent<TextMeshPro>().text = damage.ToString();
         Instantiate(floatingText.transform, transform.position + Vector3.up, Quaternion.identity, transform);
+        
     }
 }
