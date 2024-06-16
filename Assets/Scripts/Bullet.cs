@@ -4,6 +4,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Rigidbody _rb;
+    private Shoot shoot;
+
+    private void Start()
+    {
+        shoot = FindObjectOfType<Shoot>();
+    }
 
     private void Awake()
     {
@@ -24,7 +30,8 @@ public class Bullet : MonoBehaviour
             EnemyScript enemyScript = other.GetComponent<EnemyScript>();
             if (enemyScript != null)
             {
-                enemyScript.TakeDamage(5);
+                int damageTaken = shoot.CalculateDamage();
+                enemyScript.TakeDamage(damageTaken);
                 // Disable the bullet instead of destroying it
                 gameObject.SetActive(false);
             }

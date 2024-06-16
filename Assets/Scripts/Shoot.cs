@@ -59,4 +59,11 @@ public class Shoot : MonoBehaviour
 
         
     }
+
+    public int CalculateDamage()
+    {
+        int damage = Random.Range(15, 25);
+        return damage;
+
+    }
 }
