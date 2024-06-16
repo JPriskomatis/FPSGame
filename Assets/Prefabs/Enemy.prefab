@@ -113,7 +113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 8bba5af603384194ca68e8700d850b44, type: 2}
-  player: {fileID: 985983238078850715, guid: 582f54ca0583df14f9453e518247c4a7, type: 3}
   floatingText: {fileID: 4247260932769904568, guid: 9de947b4451e94d409d1eaf905dbb1c4, type: 3}
 --- !u!1 &793744884894452834
 GameObject:
@@ -124,6 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 793744884894452835}
+  - component: {fileID: 957918950685509064}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -147,6 +147,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &957918950685509064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793744884894452834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7688074a68f95a4c9721b976c72a3ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 11400000, guid: 8bba5af603384194ca68e8700d850b44, type: 2}
+  floatingText: {fileID: 4247260932769904568, guid: 9de947b4451e94d409d1eaf905dbb1c4, type: 3}
 --- !u!1 &3959063355066519012
 GameObject:
   m_ObjectHideFlags: 0
