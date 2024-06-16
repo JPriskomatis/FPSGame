@@ -38,7 +38,6 @@ public class Shoot : MonoBehaviour
 
     private void ShootBullet()
     {
-        Debug.Log("Shoot! Remaining bullets: " + bulletStack);
         anim.SetTrigger("Shoot");
         var position = transform.position + transform.forward;
         var projectile = bulletPool.GetBullet();

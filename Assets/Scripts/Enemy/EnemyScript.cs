@@ -6,16 +6,16 @@ public class EnemyScript : MonoBehaviour
 
     private int currentHealth;
 
-
+    private void Start()
+    {
+        this.SetInitialHealth(enemy.health);
+    }
 
     private void InitializeEnemy()
     {
         GameObject instantiatedEnemy = Instantiate(enemy.enemyPrefab, transform.position, transform.rotation);
         EnemyScript enemyScript = instantiatedEnemy.GetComponent<EnemyScript>();
-        if (enemyScript != null)
-        {
-            enemyScript.SetInitialHealth(enemy.health);
-        }
+
         
     }
 
@@ -27,6 +27,7 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
             Die();
