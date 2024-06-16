@@ -5,12 +5,14 @@ public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private EnemySO enemy; 
     [SerializeField] private GameObject floatingText;
+    private AudioSource bulletHit;
 
     private int currentHealth;
 
     private void Start()
     {
         SetInitialHealth(enemy.health);
+        bulletHit = GameObject.Find("bulletHit").GetComponent<AudioSource>();
     }
 
     public void SetInitialHealth(int health)
@@ -20,7 +22,9 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        bulletHit.Play();
         currentHealth -= damage;
+        
 
         if (floatingText)
             ShowDamage(damage);

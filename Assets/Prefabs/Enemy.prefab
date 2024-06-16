@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 8bba5af603384194ca68e8700d850b44, type: 2}
   floatingText: {fileID: 4247260932769904568, guid: 9de947b4451e94d409d1eaf905dbb1c4, type: 3}
+  bulletHit: {fileID: 0}
 --- !u!1 &793744884894452834
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 8bba5af603384194ca68e8700d850b44, type: 2}
   floatingText: {fileID: 4247260932769904568, guid: 9de947b4451e94d409d1eaf905dbb1c4, type: 3}
+  bulletHit: {fileID: 0}
 --- !u!1 &3959063355066519012
 GameObject:
   m_ObjectHideFlags: 0
