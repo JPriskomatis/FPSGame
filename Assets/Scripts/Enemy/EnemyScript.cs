@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] private EnemySO enemy; // ScriptableObject to define enemy properties
+    [SerializeField] private EnemySO enemy; 
     [SerializeField] private GameObject floatingText;
 
     private int currentHealth;
