@@ -3,40 +3,55 @@ using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private int poolSize = 20;
+    [SerializeField] private Bullet _bulletPrefab;
+    [SerializeField] public int poolSize = 20;
 
-    private Queue<Bullet> bulletPool;
+    private Queue<Bullet> _bulletPool;
 
     private void Awake()
     {
-        bulletPool = new Queue<Bullet>();
+        _bulletPool = new Queue<Bullet>(poolSize);
+        InitializePool();
+    }
+
+    private void InitializePool()
+    {
         for (int i = 0; i < poolSize; i++)
         {
-            Bullet bullet = Instantiate(bulletPrefab);
-            bullet.gameObject.SetActive(false);
-            bulletPool.Enqueue(bullet);
+            Bullet bullet = InstantiateBullet();
+            ReturnBulletToPool(bullet);
         }
+    }
+
+    private Bullet InstantiateBullet()
+    {
+        Bullet bullet = Instantiate(_bulletPrefab);
+        bullet.gameObject.SetActive(false);
+        return bullet;
     }
 
     public Bullet GetBullet()
     {
-        if (bulletPool.Count > 0)
+        if (_bulletPool.Count > 0)
         {
-            Bullet bullet = bulletPool.Dequeue();
-            bullet.ResetBullet();
+            Bullet bullet = _bulletPool.Dequeue();
+            bullet.gameObject.SetActive(true); // Activate before resetting
+            bullet.ResetBullet(); // Reset any bullet properties
             return bullet;
         }
         else
         {
-            Bullet bullet = Instantiate(bulletPrefab);
-            return bullet;
+            // Expand the pool dynamically if needed
+            Debug.LogWarning("Bullet pool exhausted. Expanding pool.");
+            Bullet newBullet = InstantiateBullet();
+            _bulletPool.Enqueue(newBullet); // Add the new bullet to the pool
+            return newBullet;
         }
     }
 
-    public void ReturnBullet(Bullet bullet)
+    public void ReturnBulletToPool(Bullet bullet)
     {
         bullet.gameObject.SetActive(false);
-        bulletPool.Enqueue(bullet);
+        _bulletPool.Enqueue(bullet);
     }
 }

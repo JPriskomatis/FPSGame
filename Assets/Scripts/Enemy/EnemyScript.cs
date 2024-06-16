@@ -1,41 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    private int currentHealth;
-    [SerializeField] private EnemySO enemy;
-    private bool isInitialized = false;
+    [SerializeField] private EnemySO enemy; // ScriptableObject to define enemy properties
 
-    private void Start()
-    {
-        InitializeEnemy();
-    }
+    private int currentHealth;
+
+
 
     private void InitializeEnemy()
     {
-        if (!isInitialized)
+        GameObject instantiatedEnemy = Instantiate(enemy.enemyPrefab, transform.position, transform.rotation);
+        EnemyScript enemyScript = instantiatedEnemy.GetComponent<EnemyScript>();
+        if (enemyScript != null)
         {
-            currentHealth = enemy.health;
-            // Only instantiate if this is the original enemy, not an instantiated one
-            if (enemy.enemyPrefab != null && transform.childCount == 0 && !IsInstantiatedEnemy())
-            {
-                GameObject instantiatedEnemy = Instantiate(enemy.enemyPrefab, transform.position, transform.rotation);
-                EnemyScript enemyScript = instantiatedEnemy.GetComponent<EnemyScript>();
-                if (enemyScript != null)
-                {
-                    enemyScript.SetInitialHealth(enemy.health);
-                }
-            }
-            isInitialized = true;
+            enemyScript.SetInitialHealth(enemy.health);
         }
-    }
-
-    private bool IsInstantiatedEnemy()
-    {
-        // Check if this enemy is an instantiated enemy prefab
-        return transform.parent != null && transform.parent.GetComponent<EnemyScript>() != null;
+        
     }
 
     public void SetInitialHealth(int health)
@@ -56,5 +37,14 @@ public class EnemyScript : MonoBehaviour
     {
         // Handle enemy death
         Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        // Instantiates enemy on pressing Tab key
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            InitializeEnemy();
+        }
     }
 }

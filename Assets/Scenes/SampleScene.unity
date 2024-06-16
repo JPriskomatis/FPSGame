@@ -637,7 +637,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23846
+  m_Name: pb_Mesh23844
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3575,60 +3575,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9717cc7bb9248d54b9560cc373ba6532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castingMask:
-    serializedVersion: 2
-    m_Bits: 0
-  cameraTx: {fileID: 407256741}
-  playerGFX: {fileID: 0}
-  useLocalInputs: 1
-  axisLookHorzizontal: Mouse X
-  axisLookVertical: Mouse Y
-  axisMoveHorzizontal: Horizontal
-  axisMoveVertical: Vertical
-  keyRun: 304
-  keyCrouch: 306
-  keyJump: 32
-  keySlide: 102
-  keyToggleCursor: 96
-  inputLookX: 0
-  inputLookY: 0
-  inputMoveX: 0
-  inputMoveY: 0
-  inputKeyRun: 0
-  inputKeyCrouch: 0
-  inputKeyDownJump: 0
-  inputKeyDownSlide: 0
-  inputKeyDownCursor: 0
-  mouseSensitivityX: 3
-  mouseSensitivityY: 3
-  mouseSnappiness: 20
-  invertLookY: 0
-  clampLookY: 90
-  crouchSpeed: 3
-  walkSpeed: 15
-  runSpeed: 20
-  slideSpeed: 14
-  slideDuration: 2.2
+  movementSpeed: 5
   gravity: -9.81
-  jumpHeight: 2.5
-  groundCheckY: 0.33
-  ceilingCheckY: 1.83
-  sphereCastRadius: 0.25
-  sphereCastDistance: 0.75
-  raycastLength: 0.75
-  rayOriginOffset1: {x: -0.2, y: 0, z: 0.16}
-  rayOriginOffset2: {x: 0.2, y: 0, z: -0.16}
-  showGizmos: 0
-  xRotation: 0
-  isGrounded: 0
-  groundSlopeAngle: 0
-  groundSlopeDir: {x: 0, y: 0, z: 0}
-  isSlipping: 0
-  isSliding: 0
-  slideTimer: 0
-  slideForward: {x: 0, y: 0, z: 0}
-  isCeiling: 0
-  cursorActive: 0
+  jumpHeight: 1
+  mouseSensitivity: 2
+  verticalLookLimit: 80
+  cameraTransform: {fileID: 407256741}
 --- !u!143 &1546058689
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3705,8 +3657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbff8aacff3444f4f8405976508cee53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: -5315694740650536847, guid: 03473c3f213645649bcc057acf2004f9, type: 3}
-  poolSize: 20
+  _bulletPrefab: {fileID: -5315694740650536847, guid: 03473c3f213645649bcc057acf2004f9, type: 3}
+  _poolSize: 20
 --- !u!1 &1839625483 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 779d33c6cf290734db2ceb5767cd6ad7, type: 3}

@@ -7,13 +7,12 @@ public class Shoot : MonoBehaviour
     [SerializeField] private GameObject crosshair;
     [SerializeField] private Animator anim;
 
-    [SerializeField] private int bulletStack;
+    private int bulletStack = 20; // Initial bullet stack size
     private bool isReloading = false;
-
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && bulletStack>0 && !isReloading)
+        if (Input.GetMouseButtonDown(0) && bulletStack > 0 && !isReloading)
         {
             ShootBullet();
         }
@@ -28,16 +27,18 @@ public class Shoot : MonoBehaviour
         anim.SetTrigger("Reload");
         isReloading = true;
     }
-    
+
     public void FinishReload()
     {
-        bulletStack = 20;
+        bulletStack = 20; // Reset bullet stack to full
+        bulletPool.poolSize = bulletStack; // Update pool size in BulletPool
+
         isReloading = false;
     }
 
     private void ShootBullet()
     {
-        Debug.Log("Shoot!");
+        Debug.Log("Shoot! Remaining bullets: " + bulletStack);
         anim.SetTrigger("Shoot");
         var position = transform.position + transform.forward;
         var projectile = bulletPool.GetBullet();
@@ -45,6 +46,6 @@ public class Shoot : MonoBehaviour
         projectile.transform.rotation = transform.rotation;
         projectile.Fire(projectileSpeed, crosshair.transform.forward);
 
-        bulletStack --;
+        bulletStack--;
     }
 }
