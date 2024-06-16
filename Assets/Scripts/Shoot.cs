@@ -10,16 +10,22 @@ public class Shoot : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI bulletCount;
 
+    public int bulletAmmo = 100;
     private int bulletStack = 20; // Initial bullet stack size
     private bool isReloading = false;
 
+
+    private void Start()
+    {
+        bulletCount.text = bulletStack.ToString()+" /"+bulletAmmo;
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && bulletStack > 0 && !isReloading)
         {
             ShootBullet();
         }
-        if (Input.GetKeyDown(KeyCode.R) && !isReloading)
+        if (Input.GetKeyDown(KeyCode.R) && !isReloading && bulletStack==20 )
         {
             StartReload();
         }
@@ -33,16 +39,17 @@ public class Shoot : MonoBehaviour
 
     public void FinishReload()
     {
+        bulletAmmo = (bulletAmmo - (20-bulletStack));
         bulletStack = 20; // Reset bullet stack to full
         bulletPool.poolSize = bulletStack; // Update pool size in BulletPool
-        bulletCount.text = bulletStack.ToString()+" /20";
+        bulletCount.text = bulletStack.ToString()+" /"+ bulletAmmo;
         isReloading = false;
     }
 
     private void ShootBullet()
     {
         bulletStack--;
-        bulletCount.SetText(bulletStack.ToString()+" /20");
+        bulletCount.SetText(bulletStack.ToString()+" /"+ bulletAmmo);
         anim.SetTrigger("Shoot");
         var position = transform.position + transform.forward;
         var projectile = bulletPool.GetBullet();
