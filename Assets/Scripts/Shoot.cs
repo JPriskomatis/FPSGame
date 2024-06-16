@@ -10,6 +10,9 @@ public class Shoot : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI bulletCount;
 
+    [SerializeField] private AudioSource pistolShot;
+    [SerializeField] private AudioSource pistolReload;
+
     public int bulletAmmo = 100;
     private int bulletStack = 20; // Initial bullet stack size
     private bool isReloading = false;
@@ -34,6 +37,7 @@ public class Shoot : MonoBehaviour
     private void StartReload()
     {
         anim.SetTrigger("Reload");
+        pistolReload.Play();
         isReloading = true;
     }
 
@@ -48,6 +52,7 @@ public class Shoot : MonoBehaviour
 
     private void ShootBullet()
     {
+        pistolShot.Play();
         bulletStack--;
         bulletCount.SetText(bulletStack.ToString()+" /"+ bulletAmmo);
         anim.SetTrigger("Shoot");

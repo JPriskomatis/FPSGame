@@ -7,6 +7,7 @@ public class Portal : MonoBehaviour
     public GameObject teleportDestination; // Destination GameObject where player will teleport
     public GameObject teleportTrigger; // Trigger GameObject to detect player's touch
 
+    [SerializeField] private AudioSource audioSource;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,7 +25,8 @@ public class Portal : MonoBehaviour
         // Ensure there's a destination set
         if (teleportDestination != null)
         {
-            // Teleport the player to the destination's position    
+            // Teleport the player to the destination's position
+            audioSource.Play();
             player.transform.position = teleportDestination.transform.position;
             Debug.Log("Player teleported to: " + teleportDestination.name);
         }
