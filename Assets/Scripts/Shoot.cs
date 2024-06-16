@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Shoot : MonoBehaviour
@@ -6,6 +7,8 @@ public class Shoot : MonoBehaviour
     [SerializeField] private float projectileSpeed;
     [SerializeField] private GameObject crosshair;
     [SerializeField] private Animator anim;
+
+    [SerializeField] private TextMeshProUGUI bulletCount;
 
     private int bulletStack = 20; // Initial bullet stack size
     private bool isReloading = false;
@@ -32,12 +35,14 @@ public class Shoot : MonoBehaviour
     {
         bulletStack = 20; // Reset bullet stack to full
         bulletPool.poolSize = bulletStack; // Update pool size in BulletPool
-
+        bulletCount.text = bulletStack.ToString();
         isReloading = false;
     }
 
     private void ShootBullet()
     {
+        bulletStack--;
+        bulletCount.SetText(bulletStack.ToString()+" /20");
         anim.SetTrigger("Shoot");
         var position = transform.position + transform.forward;
         var projectile = bulletPool.GetBullet();
@@ -45,6 +50,6 @@ public class Shoot : MonoBehaviour
         projectile.transform.rotation = transform.rotation;
         projectile.Fire(projectileSpeed, crosshair.transform.forward);
 
-        bulletStack--;
+        
     }
 }
