@@ -35,7 +35,7 @@ public class Shoot : MonoBehaviour
     {
         bulletStack = 20; // Reset bullet stack to full
         bulletPool.poolSize = bulletStack; // Update pool size in BulletPool
-        bulletCount.text = bulletStack.ToString();
+        bulletCount.text = bulletStack.ToString()+" /20";
         isReloading = false;
     }
 
