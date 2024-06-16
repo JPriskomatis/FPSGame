@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -61,6 +62,6 @@ public class EnemyScript : MonoBehaviour
     {
         floatingText.GetComponent<TextMeshPro>().text = damage.ToString();
         Instantiate(floatingText.transform, transform.position + Vector3.up, Quaternion.identity, transform);
-        
+
     }
 }
