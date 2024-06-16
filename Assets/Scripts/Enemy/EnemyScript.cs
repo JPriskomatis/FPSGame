@@ -3,8 +3,11 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private EnemySO enemy; // ScriptableObject to define enemy properties
+    [SerializeField] private GameObject player;
 
     private int currentHealth;
+
+    [SerializeField] private GameObject floatingText;
 
     private void Start()
     {
@@ -27,6 +30,10 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        if(floatingText)
+            ShowDamage();
+
         Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
@@ -47,5 +54,10 @@ public class EnemyScript : MonoBehaviour
         {
             InitializeEnemy();
         }
+    }
+
+    private void ShowDamage()
+    {
+        Instantiate(floatingText.transform, transform.position + Vector3.up, Quaternion.identity, transform);
     }
 }

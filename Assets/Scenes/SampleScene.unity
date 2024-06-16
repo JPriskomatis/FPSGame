@@ -4040,6 +4040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 8bba5af603384194ca68e8700d850b44, type: 2}
+  floatingText: {fileID: 0}
 --- !u!4 &1830467218
 Transform:
   m_ObjectHideFlags: 0
