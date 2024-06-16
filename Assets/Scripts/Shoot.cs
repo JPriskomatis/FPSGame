@@ -25,7 +25,7 @@ public class Shoot : MonoBehaviour
         {
             ShootBullet();
         }
-        if (Input.GetKeyDown(KeyCode.R) && !isReloading && bulletStack==20 )
+        if (Input.GetKeyDown(KeyCode.R) && !isReloading && !(bulletStack==20) )
         {
             StartReload();
         }
